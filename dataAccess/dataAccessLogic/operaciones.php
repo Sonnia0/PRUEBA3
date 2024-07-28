@@ -10,16 +10,9 @@ class Operaciones
         $this->connectionDB = $connectionDB->connect();
     }
 
-    public function realizarOperacion(float $numero1, float $numero2, string $operacion) {
-        $resultado = $this->calcularResultado($numero1, $numero2, $operacion);
-        if ($resultado !== 'Error: División por cero' && $resultado !== 'Operación no válida') {
-            $this->guardarOperacion($numero1, $numero2, $operacion, $resultado);
-        }
-        return $resultado;
-    }
 
     private function calcularResultado(float $numero1, float $numero2, string $operacion) {
-        switch ($operacion) {
+        switch ($operacion) {   //La estructura switch selecciona el cálculo a realizar basado en el valor de $operacion.
             case 'suma':
                 return $numero1 + $numero2;
             case 'resta':
@@ -32,6 +25,16 @@ class Operaciones
                 return 'Operación no válida';
         }
     }
+                                                                     //string $operacion: Tipo de operación a realizar (por ejemplo, 'suma', 'resta', 'multiplicacion', 'division').
+    public function realizarOperacion(float $numero1, float $numero2, string $operacion) { 
+        $resultado = $this->calcularResultado($numero1, $numero2, $operacion); //Llama al método privado calcularResultado
+        //Verifica que el resultado no sea un error específico ('Error: División por cero' o 'Operación no válida').
+        if ($resultado !== 'Error: División por cero' && $resultado !== 'Operación no válida') {
+            $this->guardarOperacion($numero1, $numero2, $operacion, $resultado);//Si no hubo errores, guarda la operación y su resultado utilizando el método guardarOperacion.
+        }
+        return $resultado;
+    }
+
 
     private function guardarOperacion(float $numero1, float $numero2, string $operacion, float $resultado) {
         try {

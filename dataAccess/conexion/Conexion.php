@@ -1,7 +1,7 @@
 <?php
 
 class ConexionDB {
-    private $server = "localhost:3306";
+    private $server = "localhost: 3306";
     private $database = "operaciones";
     private $username = "root";
     private $password = "";
